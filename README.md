@@ -1,4 +1,4 @@
-# Hybrid Identity and Cloud Infrastructure Onboarding Report
+# Hybrid Cloud Security & SIEM Monitoring Lab
 
 ## Executive Summary
 The objective of this deployment was to establish a secure hybrid identity architecture and centralize server management within the cloud. This involved synchronizing an on-premise Microsoft Active Directory environment with Microsoft Entra ID (Azure AD) and onboarding a local Ubuntu Linux server into Azure using Azure Arc. The foundation for centralized security monitoring was also staged, pending the resolution of subscription billing statuses.
