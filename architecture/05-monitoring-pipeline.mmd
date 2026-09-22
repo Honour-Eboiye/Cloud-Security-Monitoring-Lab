@@ -1,0 +1,8 @@
+flowchart LR
+    Sources["Sign-in Logs<br/>NSG Flow Logs<br/>Activity Logs"] --> LA[Log Analytics Workspace]
+    LA --> KQL[KQL Queries]
+    LA --> Defender[Microsoft Defender for Cloud]
+    KQL --> Investigate[Auth Log Investigation]
+    Defender --> Recs[Security Recommendations]
+    Investigate --> Report[Findings / Evidence]
+    Recs --> Report

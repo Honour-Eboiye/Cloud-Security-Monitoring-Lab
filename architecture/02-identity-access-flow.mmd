@@ -1,0 +1,9 @@
+flowchart LR
+    U[User] --> MFA{MFA Challenge}
+    MFA -- Pass --> RBAC[Entra ID RBAC Check]
+    MFA -- Fail --> Deny1[Access Denied]
+    RBAC -- Authorized Role --> Grant[Access Granted]
+    RBAC -- Unauthorized --> Deny2[Access Denied]
+    Grant --> Log[Sign-in Log → Log Analytics]
+    Deny1 --> Log
+    Deny2 --> Log

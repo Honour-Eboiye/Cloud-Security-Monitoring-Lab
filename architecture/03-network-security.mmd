@@ -1,0 +1,7 @@
+flowchart LR
+    Internet((Internet)) --> NSG[Network Security Group]
+    NSG -- Allowed Rule --> VM[Virtual Machine]
+    NSG -- Denied Rule --> Block[Traffic Blocked]
+    VM --> Subnet[Private Subnet]
+    Block --> NSGLog[NSG Flow Logs]
+    NSG --> NSGLog

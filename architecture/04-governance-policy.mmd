@@ -1,0 +1,7 @@
+flowchart TD
+    Policy[Azure Policy Definition] --> Assign[Policy Assignment]
+    Assign --> Scope[Subscription / Resource Group Scope]
+    Scope --> Eval{Resource Compliant?}
+    Eval -- Yes --> Compliant[Compliant]
+    Eval -- No --> NonCompliant[Non-Compliant / Flagged]
+    NonCompliant --> Remediate[Remediation Task]

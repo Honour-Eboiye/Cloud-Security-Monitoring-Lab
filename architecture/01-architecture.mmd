@@ -1,0 +1,20 @@
+flowchart TD
+    A[Azure Cloud Environment] --> B[Identity]
+    A --> C[Network]
+    A --> D[Governance]
+
+    B --> B1["Entra ID<br/>RBAC / MFA"]
+    C --> C1["NSG<br/>Access Rules"]
+    D --> D1["Azure Policy<br/>Enforcement"]
+
+    B1 --> E[Cloud Resources]
+    C1 --> E
+    D1 --> E
+
+    E --> F[Virtual Machine]
+    E --> G[Storage Account]
+
+    F --> H[Security Monitoring]
+    G --> H
+    H --> H1["KQL Queries"]
+    H --> H2["Microsoft Defender for Cloud"]
