@@ -4,6 +4,7 @@
 > A hands-on Azure lab demonstrating cloud security controls,
 > governance, security monitoring, and investigation.
 
+<br>
 
 ## Executive Summary
 
@@ -19,14 +20,17 @@ The goal was not only to configure controls, but to **validate their
 security effect with hands-on tests and evidence**.
 
 
+<br>
 
 > **Note:** Azure subscription availability limited some later
 > end-to-end monitoring work. Incomplete components are identified as
 > future improvements rather than presented as completed.
 
-
+<br>
 
 ------------------------------------------------------------------------
+<br>
+<br>
 
 ## Architecture
 ```mermaid
@@ -53,8 +57,11 @@ flowchart TD
 
 ```
 
+<br>
 
 ------------------------------------------------------------------------
+<br>
+<br>
 
 ## Security Controls
 
@@ -69,18 +76,31 @@ A test user was given restricted storage access and read-only VM access,
 and MFA was validated.
 
 
+<br>
+<br>
 
 ![Image showing RBAC role assignment / restricted permissions](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/identity/Screenshot%202026-08-03%20232425.png)
-*RBAC role assignment / restricted permissions.*
+<div align="center">
+    *RBAC role assignment / restricted permissions.* 
+</div>
 
+<br>
+<br>
 
 ![An Image Showing MFA validation without exposing personal information.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/identity/Screenshot%202026-07-24%20132541.png)
-*MFA validation*
+<div align="center"> 
+    *MFA validation* 
+</div>
 
+<br>
 
 ------------------------------------------------------------------------
+<br>
+<br>
 
 ### 2. Network Security
+
+<br>
 
 **Objective:** Reduce unnecessary network exposure to the VM.
 
@@ -88,6 +108,8 @@ An Azure Network Security Group was configured to restrict inbound
 access to a trusted source. An unauthorized connection attempt was
 blocked.
 
+<br>
+<br>
 
 ``` mermaid
 flowchart LR
@@ -100,39 +122,61 @@ flowchart LR
 
 ```
 
+<br>
+<br>
 
+![An Image Showing the relevant NSG inbound rule.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/network/Deliverable%204.png)
+<div align="center"> 
+    *Relevant NSG inbound rule.* 
+<div>
 
-![AN Image Showing the relevant NSG inbound rule.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/network/Deliverable%204.png)
-*Relevant NSG inbound rule.*
-
-
+<br>
+<br>
 
 ![An Image Showing Unauthorized SSH connection was blocked.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/network/Deliverable%205.png)
-*Unauthorized connection was blocked.*
+<div align="center">
+    Unauthorized connection was blocked.
+</div>
 
+<br>
 
 ------------------------------------------------------------------------
+<br>
+<br>
 
 ### 3. Storage Security & Data Protection
 
+<br>
+
 **Objective:** Reduce the risk of unintended public access to cloud
 data.
+
+<br>
 
 **Implemented:** - Public access restrictions - Encryption at rest -
 Time-bound SAS access - Granular permissions
 
 ![A SAS with public access restrictions and encryption settings.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/cee972c4f74ca79d7692ddbae063abd9b78c3dcf/storage/SAS%20GENERATION.png)
-*Public access restrictions and encryption settings.*
+
+<div align="center"> 
+    *Public access restrictions and encryption settings.*
+</div>
 
 > **Warning:** Never publish SAS tokens, access keys, passwords,
 > or other secrets. Redact them from screenshots before uploading to
 > GitHub (as the SAS token in the image above is no longer active).
 
+<br>
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
 
 ### 4. Governance & Policy Enforcement
+
+<br>
+<br>
 
 **Objective:** Prevent defined non-compliant configurations from being
 deployed.
@@ -140,6 +184,9 @@ deployed.
 Azure Policy was used as a governance control. A controlled policy
 violation was tested and the deployment was blocked.
 
+<br>
+<br>
+
 ``` mermaid
 flowchart LR
     Internet((Internet)) --> NSG[Network Security Group]
@@ -151,23 +198,37 @@ flowchart LR
 
 ```
 
+<br>
+<br>
 
 ![Image showing blocked deployment result as a result of not adhering to organisation's policy.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/governance/Screenshot%202026-07-30%20153821.png)
 
-*Blocked deployment result as a result of not adhering to organisation's policy.*
+<div align="center">
+    *Blocked deployment result as a result of not adhering to organisation's policy.*
+</div>
 
-
+<br>
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
 ### 5. Security Monitoring & Investigation
+
+<br>
 
 **Objective:** Use security telemetry to investigate authentication
 activity.
 
+<br>
+
 The project included: - Security event monitoring - Failed
 authentication analysis - KQL-based investigation - Microsoft Defender
 for Cloud recommendations
+
+<br>
+<br>
 
 ``` mermaid
 flowchart LR
@@ -181,23 +242,39 @@ flowchart LR
 
 ```
 
+<br>
+<br>
 
 ### The KQL query.
+
 <br>
+
 ![Image of Failed-authentication events.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/cee972c4f74ca79d7692ddbae063abd9b78c3dcf/monitoring/KQL%20Query.png)
+
+
+<br>
+<br>
 
 ![Image of Failed-authentication events.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/cee972c4f74ca79d7692ddbae063abd9b78c3dcf/network/SSH%20RULE%20IMPLEMENTATED.png)
 
-*Failed-authentication events.*
+<div align="center">
+    *Failed-authentication events.*
+</div>
 
-
+<br>
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
 
 ## Detection Use Case
 
+<br>
+
 ### Failed Authentication Investigation
+
+<br>
 
 **Scenario:** Failed authentication events occur against a cloud
 workload.
@@ -212,9 +289,12 @@ credential abuse?
 
 **Investigation tool:** KQL
 
+<br>
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
 
 ## Security Findings & Remediation
 
@@ -242,13 +322,17 @@ credential abuse?
                                                   with KQL
   -----------------------------------------------------------------------
 
-
+<br>
 
 ------------------------------------------------------------------------
 
 
+<br>
 
 ## Security Workflow
+
+<br>
+<br>
 
 ``` mermaid
 flowchart LR
@@ -262,14 +346,17 @@ flowchart LR
 
 ```
 
+<br>
+
 The project helped me connect cloud infrastructure security with
 security operations rather than treating them as separate areas.
 
-
+<br>
 
 ------------------------------------------------------------------------
 
-
+<br>
+<br>
 
 ## Limitations
 
@@ -284,9 +371,13 @@ The project does not claim incomplete end-to-end components as fully
 operational.
 
 
+<br>
 
 ------------------------------------------------------------------------
 
+
+<br>
+<br>
 
 ## Future Improvements
 
@@ -298,10 +389,12 @@ operational.
 -   Integrate incident/ticket management
 -   Expand service-principal and workload-identity monitoring
   
+<br>
 
 ------------------------------------------------------------------------
 
-
+<br>
+<br>
 
 ## Technologies
 
@@ -322,8 +415,11 @@ Defender for Cloud
 Detection, Security Monitoring, Incident Investigation
 
 
+<br>
 
 ------------------------------------------------------------------------
+<br>
+<br>
 
 ## Evidence Structure
 
@@ -347,9 +443,11 @@ Detection, Security Monitoring, Incident Investigation
     ├── query-results.png
     └── defender-recommendations.png
 ```
+<br>
 
 ------------------------------------------------------------------------
-
+<br>
+<br>
 
 ## AI-Assisted Learning
 
