@@ -1,7 +1,9 @@
 # Cloud Security Monitoring Lab
 
+
 > A hands-on Azure lab demonstrating cloud security controls,
 > governance, security monitoring, and investigation.
+
 
 ## Executive Summary
 
@@ -16,43 +18,41 @@ Microsoft Defender for Cloud recommendations
 The goal was not only to configure controls, but to **validate their
 security effect with hands-on tests and evidence**.
 
+
+
 > **Note:** Azure subscription availability limited some later
 > end-to-end monitoring work. Incomplete components are identified as
 > future improvements rather than presented as completed.
 
+
+
 ------------------------------------------------------------------------
 
 ## Architecture
+```mermaid
+flowchart TD
+    A[Azure Cloud Environment] --> B[Identity]
+    A --> C[Network]
+    A --> D[Governance]
 
-``` text
-                    AZURE CLOUD ENVIRONMENT
-                           │
-          ┌────────────────┼────────────────┐
-          │                │                │
-          ▼                ▼                ▼
-       Identity        Network          Governance
-       Entra ID           NSG           Azure Policy
-       RBAC / MFA     Access Rules       Enforcement
-          │                │                │
-          └────────────────┼────────────────┘
-                           ▼
-                    Cloud Resources
-                    ┌──────┴──────┐
-                    ▼             ▼
-                   VM          Storage
-                    │             │
-                    └──────┬──────┘
-                           ▼
-                 Security Monitoring
-                     KQL / Defender
+    B --> B1["Entra ID<br/>RBAC / MFA"]
+    C --> C1["NSG<br/>Access Rules"]
+    D --> D1["Azure Policy<br/>Enforcement"]
+
+    B1 --> E[Cloud Resources]
+    C1 --> E
+    D1 --> E
+
+    E --> F[Virtual Machine]
+    E --> G[Storage Account]
+
+    F --> H[Security Monitoring]
+    G --> H
+    H --> H1["KQL Queries"]
+    H --> H2["Microsoft Defender for Cloud"]
+
 ```
 
-### Architecture Evidence
-
-📸 **Screenshot slot --- `evidence/01-architecture.png`**
-
-> Show the actual Azure architecture/environment if available. Do not
-> use a generic diagram as evidence of implementation.
 
 ------------------------------------------------------------------------
 
@@ -67,11 +67,15 @@ permissions - MFA
 
 A test user was given restricted storage access and read-only VM access,
 and MFA was validated.
-*RBAC role assignment / restricted permissions.*
-![Image showing RBAC role assignment / restricted permissions](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/identity/Screenshot%202026-08-03%20232425.png)
 
-*MFA validation*
+
+
+![Image showing RBAC role assignment / restricted permissions](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/identity/Screenshot%202026-08-03%20232425.png)
+*RBAC role assignment / restricted permissions.*
+
+
 ![An Image Showing MFA validation without exposing personal information.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/identity/Screenshot%202026-07-24%20132541.png)
+*MFA validation*
 
 
 ------------------------------------------------------------------------
@@ -84,17 +88,27 @@ An Azure Network Security Group was configured to restrict inbound
 access to a trusted source. An unauthorized connection attempt was
 blocked.
 
-``` text
-Trusted Source ──────► ALLOWED ──────► VM
-Untrusted Source ─────► BLOCKED
+
+``` mermaid
+flowchart LR
+    Internet((Internet)) --> NSG[Network Security Group]
+    NSG -- Allowed Rule --> VM[Virtual Machine]
+    NSG -- Denied Rule --> Block[Traffic Blocked]
+    VM --> Subnet[Private Subnet]
+    Block --> NSGLog[NSG Flow Logs]
+    NSG --> NSGLog
+
 ```
 
-*Relevant NSG inbound rule.*
+
+
 ![AN Image Showing the relevant NSG inbound rule.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/network/Deliverable%204.png)
+*Relevant NSG inbound rule.*
 
 
-*Unauthorized connection was blocked.*
+
 ![An Image Showing Unauthorized SSH connection was blocked.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/network/Deliverable%205.png)
+*Unauthorized connection was blocked.*
 
 
 ------------------------------------------------------------------------
@@ -107,14 +121,16 @@ data.
 **Implemented:** - Public access restrictions - Encryption at rest -
 Time-bound SAS access - Granular permissions
 
-![Public access restrictions and encryption settings.]()
+![A SAS with public access restrictions and encryption settings.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/cee972c4f74ca79d7692ddbae063abd9b78c3dcf/storage/SAS%20GENERATION.png)
 *Public access restrictions and encryption settings.*
 
 > **Warning:** Never publish SAS tokens, access keys, passwords,
 > or other secrets. Redact them from screenshots before uploading to
 > GitHub (as the SAS token in the image above is no longer active).
 
+
 ------------------------------------------------------------------------
+
 
 ### 4. Governance & Policy Enforcement
 
@@ -124,20 +140,23 @@ deployed.
 Azure Policy was used as a governance control. A controlled policy
 violation was tested and the deployment was blocked.
 
-``` text
-Deployment
-    ↓
-Azure Policy
-    ↓
-Policy Check
-  ↙       ↘
-Pass      Fail
- ↓          ↓
-Allow      Block
+``` mermaid
+flowchart LR
+    Internet((Internet)) --> NSG[Network Security Group]
+    NSG -- Allowed Rule --> VM[Virtual Machine]
+    NSG -- Denied Rule --> Block[Traffic Blocked]
+    VM --> Subnet[Private Subnet]
+    Block --> NSGLog[NSG Flow Logs]
+    NSG --> NSGLog
+
 ```
 
+
+![Image showing blocked deployment result as a result of not adhering to organisation's policy.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/governance/Screenshot%202026-07-30%20153821.png)
+
 *Blocked deployment result as a result of not adhering to organisation's policy.*
-![Image showing the policy assignment was blocked blocked deployment result.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/governance/Screenshot%202026-07-30%20153821.png)
+
+
 
 ------------------------------------------------------------------------
 
@@ -150,30 +169,31 @@ The project included: - Security event monitoring - Failed
 authentication analysis - KQL-based investigation - Microsoft Defender
 for Cloud recommendations
 
-``` text
-Security Event
-      ↓
-Log / Telemetry
-      ↓
-KQL Query
-      ↓
-Authentication Events
-      ↓
-Investigation
-      ↓
-Risk Assessment
+``` mermaid
+flowchart LR
+    Sources["Sign-in Logs<br/>NSG Flow Logs<br/>Activity Logs"] --> LA[Log Analytics Workspace]
+    LA --> KQL[KQL Queries]
+    LA --> Defender[Microsoft Defender for Cloud]
+    KQL --> Investigate[Auth Log Investigation]
+    Defender --> Recs[Security Recommendations]
+    Investigate --> Report[Findings / Evidence]
+    Recs --> Report
+
 ```
 
-*The KQL query.*
-![Image of the KQL query that was used]()
+
+### The KQL query.
+<br>
+![Image of Failed-authentication events.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/cee972c4f74ca79d7692ddbae063abd9b78c3dcf/monitoring/KQL%20Query.png)
+
+![Image of Failed-authentication events.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/cee972c4f74ca79d7692ddbae063abd9b78c3dcf/network/SSH%20RULE%20IMPLEMENTATED.png)
 
 *Failed-authentication events.*
-![Image of Failed-authentication events.]()
 
-![Image od Relevant Defender for Cloud recommendations.]()
-*Relevant Defender for Cloud recommendations.*
+
 
 ------------------------------------------------------------------------
+
 
 ## Detection Use Case
 
@@ -192,7 +212,9 @@ credential abuse?
 
 **Investigation tool:** KQL
 
+
 ------------------------------------------------------------------------
+
 
 ## Security Findings & Remediation
 
@@ -224,16 +246,30 @@ credential abuse?
 
 ------------------------------------------------------------------------
 
+
+
 ## Security Workflow
 
-``` text
-DESIGN → SECURE → GOVERN → MONITOR → DETECT → INVESTIGATE → REMEDIATE → IMPROVE
+``` mermaid
+flowchart LR
+    Sources["Sign-in Logs<br/>NSG Flow Logs<br/>Activity Logs"] --> LA[Log Analytics Workspace]
+    LA --> KQL[KQL Queries]
+    LA --> Defender[Microsoft Defender for Cloud]
+    KQL --> Investigate[Auth Log Investigation]
+    Defender --> Recs[Security Recommendations]
+    Investigate --> Report[Findings / Evidence]
+    Recs --> Report
+
 ```
 
 The project helped me connect cloud infrastructure security with
 security operations rather than treating them as separate areas.
 
+
+
 ------------------------------------------------------------------------
+
+
 
 ## Limitations
 
@@ -247,7 +283,10 @@ and validated** - **Monitoring/investigation activities demonstrated** -
 The project does not claim incomplete end-to-end components as fully
 operational.
 
+
+
 ------------------------------------------------------------------------
+
 
 ## Future Improvements
 
@@ -258,8 +297,11 @@ operational.
 -   Add additional cloud attack scenarios
 -   Integrate incident/ticket management
 -   Expand service-principal and workload-identity monitoring
+  
 
 ------------------------------------------------------------------------
+
+
 
 ## Technologies
 
@@ -279,12 +321,13 @@ Defender for Cloud
 **Security Concepts:** Least Privilege, Defense in Depth, Threat
 Detection, Security Monitoring, Incident Investigation
 
+
+
 ------------------------------------------------------------------------
 
 ## Evidence Structure
 
 ``` text
-evidence/
 ├── identity/
 │   ├── rbac.png
 │   └── mfa.png
@@ -305,12 +348,8 @@ evidence/
     └── defender-recommendations.png
 ```
 
-Only include screenshots that **actually prove the claim being made**.
-If a screenshot is not available or does not clearly demonstrate an
-implemented control, remove that slot rather than adding a generic
-image.
-
 ------------------------------------------------------------------------
+
 
 ## AI-Assisted Learning
 
