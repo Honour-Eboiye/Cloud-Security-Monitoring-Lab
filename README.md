@@ -30,7 +30,6 @@ security effect with hands-on tests and evidence**.
 
 ------------------------------------------------------------------------
 <br>
-<br>
 
 ## Architecture
 ```mermaid
@@ -61,7 +60,6 @@ flowchart TD
 
 ------------------------------------------------------------------------
 <br>
-<br>
 
 ## Security Controls
 
@@ -72,30 +70,31 @@ flowchart TD
 **Implemented:** - Microsoft Entra ID - Azure RBAC - Least-privilege
 permissions - MFA
 
+<br>
+<br>
 A test user was given restricted storage access and read-only VM access,
 and MFA was validated.
 
 
-<br>
-<br>
+![Image showing RBAC role assignment / restricted permissions](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/764e86d5bae7dc9cc6971501cd7ff6ee6c7522c8/identity/RBAC%20Assignment.png)
 
-![Image showing RBAC role assignment / restricted permissions](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/identity/Screenshot%202026-08-03%20232425.png)
 <div align="center">
-    *RBAC role assignment / restricted permissions.* 
+    RBAC role assignment / restricted permissions.
 </div>
 
 <br>
 <br>
 
-![An Image Showing MFA validation without exposing personal information.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/identity/Screenshot%202026-07-24%20132541.png)
+![An Image Showing MFA validation without exposing personal information.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/764e86d5bae7dc9cc6971501cd7ff6ee6c7522c8/identity/MFA.png)
+
 <div align="center"> 
-    *MFA validation* 
+    MFA validation
 </div>
 
 <br>
 
 ------------------------------------------------------------------------
-<br>
+
 <br>
 
 ### 2. Network Security
@@ -125,15 +124,17 @@ flowchart LR
 <br>
 <br>
 
-![An Image Showing the relevant NSG inbound rule.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/network/Deliverable%204.png)
+![An Image Showing the relevant NSG inbound rule.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/764e86d5bae7dc9cc6971501cd7ff6ee6c7522c8/network/INBOUND%20SSH%20SECURITY%20RULE.png)
+
 <div align="center"> 
-    *Relevant NSG inbound rule.* 
-<div>
+    Relevant NSG inbound rule.
+</div>
 
 <br>
 <br>
 
-![An Image Showing Unauthorized SSH connection was blocked.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/network/Deliverable%205.png)
+![An Image Showing Unauthorized SSH connection was blocked.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/764e86d5bae7dc9cc6971501cd7ff6ee6c7522c8/network/SSH%20RULE%20IMPLEMENTATED.png)
+
 <div align="center">
     Unauthorized connection was blocked.
 </div>
@@ -141,25 +142,22 @@ flowchart LR
 <br>
 
 ------------------------------------------------------------------------
-<br>
+
 <br>
 
 ### 3. Storage Security & Data Protection
-
-<br>
 
 **Objective:** Reduce the risk of unintended public access to cloud
 data.
 
 <br>
 
-**Implemented:** - Public access restrictions - Encryption at rest -
-Time-bound SAS access - Granular permissions
+**Implemented:** - Public access restrictions - Encryption at rest -Time-bound SAS access - Granular permissions
 
 ![A SAS with public access restrictions and encryption settings.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/cee972c4f74ca79d7692ddbae063abd9b78c3dcf/storage/SAS%20GENERATION.png)
 
 <div align="center"> 
-    *Public access restrictions and encryption settings.*
+    Public access restrictions and encryption settings.
 </div>
 
 > **Warning:** Never publish SAS tokens, access keys, passwords,
@@ -170,7 +168,7 @@ Time-bound SAS access - Granular permissions
 
 ------------------------------------------------------------------------
 
-<br>
+
 <br>
 
 ### 4. Governance & Policy Enforcement
@@ -201,7 +199,7 @@ flowchart LR
 <br>
 <br>
 
-![Image showing blocked deployment result as a result of not adhering to organisation's policy.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/ddcafad123c7f9d9a9e5b4372c4592a6c0191294/governance/Screenshot%202026-07-30%20153821.png)
+![Image showing blocked deployment result as a result of not adhering to organisation's policy.](https://github.com/Honour-Eboiye/Cloud-Security-Monitoring-Lab/blob/764e86d5bae7dc9cc6971501cd7ff6ee6c7522c8/governance/Non-compliant%20Deployment.png)
 
 <div align="center">
     *Blocked deployment result as a result of not adhering to organisation's policy.*
@@ -266,11 +264,9 @@ flowchart LR
 ------------------------------------------------------------------------
 
 <br>
-<br>
 
 ## Detection Use Case
 
-<br>
 
 ### Failed Authentication Investigation
 
@@ -293,7 +289,6 @@ credential abuse?
 
 ------------------------------------------------------------------------
 
-<br>
 <br>
 
 ## Security Findings & Remediation
@@ -331,7 +326,7 @@ credential abuse?
 
 ## Security Workflow
 
-<br>
+
 <br>
 
 ``` mermaid
@@ -356,7 +351,6 @@ security operations rather than treating them as separate areas.
 ------------------------------------------------------------------------
 
 <br>
-<br>
 
 ## Limitations
 
@@ -377,7 +371,6 @@ operational.
 
 
 <br>
-<br>
 
 ## Future Improvements
 
@@ -393,7 +386,6 @@ operational.
 
 ------------------------------------------------------------------------
 
-<br>
 <br>
 
 ## Technologies
@@ -418,7 +410,6 @@ Detection, Security Monitoring, Incident Investigation
 <br>
 
 ------------------------------------------------------------------------
-<br>
 <br>
 
 ## Evidence Structure
@@ -446,7 +437,6 @@ Detection, Security Monitoring, Incident Investigation
 <br>
 
 ------------------------------------------------------------------------
-<br>
 <br>
 
 ## AI-Assisted Learning
